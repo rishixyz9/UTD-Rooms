@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Building {
     String name;
@@ -28,6 +29,13 @@ public class Building {
             floor.checkChildren();
         }
         System.out.println("---------");
+    }
+
+    void sortChildren() {
+        Collections.sort(floors);
+        for (Floor ourFloor : floors) {
+            Collections.sort(ourFloor.classes);   
+        }
     }
 
     void addClass(Class toAdd) {

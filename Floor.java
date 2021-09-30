@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.lang.Comparable;
 
-public class Floor {
+public class Floor implements Comparable<Floor>{
     int floor;
     ArrayList<Class> classes = new ArrayList<Class>();
 
@@ -15,6 +16,13 @@ public class Floor {
 
     void addClass(Class toAdd) {
         classes.add(toAdd);
-        System.out.println("Added class " + toAdd.prefix + "." + toAdd.courseNumber + "." + toAdd.section + " @ " + toAdd.building + " " + toAdd.room);
+        //System.out.println("Added class " + toAdd.prefix + "." + toAdd.courseNumber + "." + toAdd.section + " @ " + toAdd.building + " " + toAdd.room);
+    }
+
+    @Override
+    public int compareTo(Floor comparesTo) {
+        int compareNum=((Floor)comparesTo).floor;
+        /* For Ascending order*/
+        return this.floor-compareNum;
     }
 }

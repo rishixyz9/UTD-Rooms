@@ -2,6 +2,8 @@ import com.google.gson.*;
 
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
+
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.io.IOException;
@@ -21,6 +23,8 @@ class rawClass {
 }
 
 public class Ingest {
+    static int ingested = 0;
+
     static Class createClass(rawClass oldClass) throws ParseException {
         Class newClass = new Class();
         newClass.prefix = oldClass.course_prefix;
@@ -43,7 +47,7 @@ public class Ingest {
         String startTime = time.substring(0, time.indexOf("-"));
         String endTime = time.substring(time.indexOf("-")+1,time.length());
         
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         try {
             newClass.startTime = sdf.parse(startTime);
             newClass.endTime = sdf.parse(endTime);
@@ -51,15 +55,14 @@ public class Ingest {
             e.printStackTrace();
         }
 
-        System.out.println("Created new class (" + newClass.prefix + "." + newClass.courseNumber + "." + newClass.section + ")");
+        //System.out.println("Created new class (" + newClass.prefix + "." + newClass.courseNumber + "." + newClass.section + ")");
 
         return newClass;
     }
-
-    public static void main(String args[]) throws IOException, ParseException {
+    static void ingestFile(File file) throws IOException, ParseException {
+        System.out.println("Beginning ingest on " + file.getName());
         Gson gson = new Gson();
-
-        FileReader reader = new FileReader("smallClasses.json");
+        FileReader reader = new FileReader(file);
 
         Type classListType = new TypeToken<ArrayList<rawClass>>(){}.getType();
         ArrayList<rawClass> classArray = gson.fromJson(reader, classListType);  
@@ -67,8 +70,25 @@ public class Ingest {
         for(rawClass ourClass : classArray) {
             Class newClass = createClass(ourClass);
             ClassMaster.addClass(newClass);
+            ingested++;
+        }
+        System.out.println("Ingested " + classArray.size() + " classes from " + file.getName());
+    }
+
+    public static void startIngest() throws IOException, ParseException {
+        //File[] files = new File("\\").listFiles();
+        File[] files = new File("ClassData").listFiles();
+
+        for (File file : files){
+            if (file.isDirectory()){
+                //System.out.println("Directory: " + filename.getName());
+            } else {
+                ingestFile(file);
+                //System.out.println("File: " + filename.getName());
+            }
         }
 
-        ClassMaster.checkBuildings();
+        System.out.println("Ingested " + ingested + " total classes.");
+        ClassMaster.sortBuildings();
     }
 }

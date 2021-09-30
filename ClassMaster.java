@@ -5,7 +5,7 @@ public class ClassMaster {
     
     static boolean seeIfBuildingExists(String buildName) {
         for (Building ourBuild : buildings) {
-            // System.out.println(ourBuild.name + " / " + buildName);
+            //System.out.println(ourBuild.name + " / " + buildName);
             if (ourBuild.name.equals(buildName)) {
                 return true;
             }
@@ -36,11 +36,17 @@ public class ClassMaster {
             Building newBuilding = new Building();
             newBuilding.name = toAdd.building;
             buildings.add(newBuilding);
-
+            
             newBuilding.addClass(toAdd);
         } else {
             Building ourBuilding = findBuild(toAdd.building);
             ourBuilding.addClass(toAdd);
+        }
+    }
+
+    static void sortBuildings() {
+        for (Building ourBuild : buildings) {
+            ourBuild.sortChildren();
         }
     }
 }
