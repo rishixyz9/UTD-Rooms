@@ -26,6 +26,6 @@ public class Main {
         scanner.close();
         Search.search(day, building,floor,startTime,endTime);
 
-        //ClassMaster.checkBuildings(); // Debug
+        ClassMaster.checkBuildings(); // Debug
     }
 }
