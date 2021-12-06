@@ -8,19 +8,19 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter day");
+        System.out.println("Enter day"); // Monday/Tuesday/etc
         String day = scanner.nextLine();
 
-        System.out.println("Enter building");
+        System.out.println("Enter building"); // ECSN, ECSW, etc
         String building = scanner.nextLine();
 
-        System.out.println("Floor");
+        System.out.println("Floor"); // NUM#
         int floor = Integer.parseInt(scanner.nextLine());
 
-        System.out.println("Start Time");
+        System.out.println("Start Time"); // xx:xx
         String startTime = scanner.nextLine();
 
-        System.out.println("End Time");
+        System.out.println("End Time"); // xx:xx
         String endTime = scanner.nextLine();
         
         scanner.close();
