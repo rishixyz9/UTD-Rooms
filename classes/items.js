@@ -25,19 +25,22 @@ let Class = class {
 let Floor = class {
     constructor(name) {
         this.name = name;
-        this.classes = [];
+        this.rooms = [];
     }
 
     checkChildren() {
-        console.log("Showing classes on floor " + this.name);
-        this.classes.forEach(function (item, index) {
-            console.log("Class " + item.prefix + "." + item.course_number + "." + item.section 
-            + " (" + item.building + " " + item.room + ")");
+        console.log("Showing rooms on floor " + this.name);
+        Object.entries(this.rooms).forEach(([roomNum,classObjArray]) => {
+            console.log("Room " + roomNum + " exists");
         });
         console.log("----------");
     }
     addClass(toAdd) {
-        this.classes.push(toAdd);
+        if (typeof(this.rooms[toAdd.room]) == "undefined") {
+            this.rooms[toAdd.room] = [];
+        }
+        this.rooms[toAdd.room].push(toAdd);
+        
         //console.log("Assigned class to " + this.name);
     }
 }
@@ -46,6 +49,7 @@ let Building = class {
     constructor(name) {
         this.name = name;
         this.floors = [];
+        //console.log("Created new building " + name)
     }
     seeIfFloorExists(findFloor) {
         for (let floor of this.floors) {
@@ -70,14 +74,6 @@ let Building = class {
         });
         console.log("----------");
     }
-
-    sortChildren() {
-        // sort floors
-        this.floor.forEach(function (item, index) {
-            // sort
-        });
-    }
-    
 
     addClass(toAdd) {
         if(this.seeIfFloorExists(toAdd.floor) == false) {
@@ -107,7 +103,6 @@ module.exports = function() {
                 return true;
             }
         }
-        
         return false;;
     }
     
@@ -140,12 +135,6 @@ module.exports = function() {
             let ourBuilding = findBuild(toAdd.building);
             ourBuilding.addClass(toAdd);
         }
-    }
-    
-    this.sortBuildings = function() {
-        this.buildings.forEach(function (item, index) {
-            item.sortChildren();
-        });
     }
 }
 

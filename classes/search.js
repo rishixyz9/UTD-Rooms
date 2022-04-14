@@ -11,10 +11,10 @@ require("./items.js")();
 function checkIfDay(days, findDay) {
     for (let day of days) {
         if(day == findDay) {
-            return false
+            return true
         }
     }
-    return true;
+    return false;
 }
 
 function checkClassTime(day, stringStart, stringEnd, ourClass) {
@@ -24,9 +24,10 @@ function checkClassTime(day, stringStart, stringEnd, ourClass) {
     let class_start = ourClass.time_start.replace(':','');
     let class_end = ourClass.time_end.replace(':','');
     
-    if(checkIfDay(ourClass.days, day)) {
+    // To check if valid time -- end before class start, start after class end
+    if(!checkIfDay(ourClass.days, day)) { // If not on current day
         return true;
-    } else if( start > class_start && end < class_end ) {
+    } else if( (end < class_start) || (start > class_end)  ) { // Already checked day, now check times
         return true;
     }
 
@@ -56,36 +57,56 @@ function returnClassUse(ourClass) {
     for(let day of ourClass.days) {
         abbDays = abbDays + day.substring(0,3) + " ";
     }
-    let string = ourClass.building + " " + ourClass.room + "(In use between " + formatDate(ourClass.time_start) + " and " + formatDate(ourClass.time_end) + " on " + abbDays;
+    let string = "(In use between " + formatDate(ourClass.time_start) + " and " + formatDate(ourClass.time_end) + " on " + abbDays.slice(0,-1) 
+    + " [" + ourClass.prefix + " " + ourClass.course_number + "." + ourClass.section.slice(0,-1)  + "])";
     return string;
 }
 
-
 module.exports = function() {
     this.search = function(day, building, floor, startTime, endTime) {
-        let foundBuilding = findBuild(building);
+        console.log("[UTD Room Search]")
+        console.log("  [Day]: " + day);
+        console.log("  [Building]: " + building);
+        console.log("  [Floor]: " + floor);
+        console.log("  [Start Time]: " + startTime);
+        console.log("  [End Time]: " + endTime);
+        console.log("Searching for available rooms...\n")
+
         let foundFloor = getFloor(building, floor);
-    
-        let resultClass = [];
-        let thrownClass = [];
-        
-        foundFloor.classes.forEach(function (item, index) {
-            if (checkClassTime(day, startTime, endTime, item) == true) {
-                resultClass.push(item);
-            } else {
-                thrownClass.push(item);
+        let goodClass = [];
+        let badClass = [];
+
+        Object.entries(foundFloor.rooms).forEach(([roomNum,classObjArray]) => {
+            // roomNum = room number
+            // Loop through classObjArray to see if any
+            let passed = true;
+            let faultClass = undefined;
+
+            Object.entries(classObjArray).forEach(([index,classObj]) => {
+                if (checkClassTime(day, startTime, endTime, classObj) == true) {
+                    // none
+                } else {
+                    faultClass = classObj;
+                    passed = false;
+                }
+            })
+
+            if(passed) {
+                goodClass.push([roomNum,classObjArray]);
+            }else{
+                badClass.push([roomNum, faultClass])
             }
-        });
-    
-        console.log("Found " + resultClass.length + " classes:");
-        for(let ourClass of resultClass) {
-            console.log(returnClassUse(ourClass))
+        })
+        
+        console.log("Found " + goodClass.length + " rooms:");
+        for(let pair of goodClass) {
+            console.log(pair[0]);
         }
         console.log("----------");
     
-        console.log("Threw " + thrownClass.length + " classes:");
-        for(let ourClass of thrownClass) {
-            console.log(returnClassUse(ourClass))
+        console.log("Threw " + badClass.length + " rooms:");
+        for(let pair of badClass) {
+            console.log(pair[0] + " " + returnClassUse(pair[1]));
         }
         console.log("----------");
     }
