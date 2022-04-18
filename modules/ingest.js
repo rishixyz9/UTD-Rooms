@@ -13,9 +13,9 @@ require("./items.js")();
 
 function ingest() {
     let ingested = 0;
-    const jsonsInDir = fs.readdirSync('./ClassData').filter(file => path.extname(file) === '.json');
+    const jsonsInDir = fs.readdirSync('./ClassData/22_Spring').filter(file => path.extname(file) === '.json');
     jsonsInDir.forEach(file => {
-        const fileData = fs.readFileSync(path.join('./ClassData', file));
+        const fileData = fs.readFileSync(path.join('./ClassData/22_Spring', file));
         const json = JSON.parse(fileData.toString());
         //console.log(json);
         json.report_data.forEach(obj => {

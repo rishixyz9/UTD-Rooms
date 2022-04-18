@@ -6,7 +6,7 @@
 
 // Objects for storage and exported classmaster functions
 
-let Class = class {
+let Class = class { // Class object
     constructor(prefix, course_number, section, building, floor, room, days, time_start, time_end) {
         this.prefix = prefix;
         this.course_number = course_number;
@@ -22,36 +22,38 @@ let Class = class {
     }    
 };
 
-let Floor = class {
+let Floor = class { // Floor object
     constructor(name) {
         this.name = name;
         this.rooms = [];
     }
 
-    checkChildren() {
+    checkChildren() { // List all rooms on floor
         console.log("Showing rooms on floor " + this.name);
         Object.entries(this.rooms).forEach(([roomNum,classObjArray]) => {
             console.log("Room " + roomNum + " exists");
         });
         console.log("----------");
     }
-    addClass(toAdd) {
-        if (typeof(this.rooms[toAdd.room]) == "undefined") {
+
+    addClass(toAdd) { // Add class to floor (add to room)
+        if (typeof(this.rooms[toAdd.room]) == "undefined") { // If class array is not initialized
             this.rooms[toAdd.room] = [];
         }
-        this.rooms[toAdd.room].push(toAdd);
+        this.rooms[toAdd.room].push(toAdd); // Push to dictionary
         
         //console.log("Assigned class to " + this.name);
     }
 }
 
-let Building = class {
+let Building = class { // Building object
     constructor(name) {
         this.name = name;
         this.floors = [];
         //console.log("Created new building " + name)
     }
-    seeIfFloorExists(findFloor) {
+
+    seeIfFloorExists(findFloor) { // Check if floor exists
         for (let floor of this.floors) {
             if(floor.name == findFloor) {
                 return true;
@@ -59,7 +61,8 @@ let Building = class {
         }
         return false;
     }
-    findFloor(floorNumber) {
+
+    findFloor(floorNumber) { // Find floor from floor number
         for (let floor of this.floors) {
             if(floor.name == floorNumber) {
                 return floor;
@@ -67,7 +70,8 @@ let Building = class {
         }
         return false;
     }
-    checkChildren() {
+
+    checkChildren() { // Prompt floor check
         console.log("Showing results for building " + this.name);
         this.floors.forEach(function (item, index) {
             item.checkChildren();
@@ -75,18 +79,17 @@ let Building = class {
         console.log("----------");
     }
 
-    addClass(toAdd) {
-        if(this.seeIfFloorExists(toAdd.floor) == false) {
+    addClass(toAdd) { // Add class to building
+        if(this.seeIfFloorExists(toAdd.floor) == false) { // If floor doesn't exist then create new floor and add
             let newFloor = new Floor(toAdd.floor);
             this.floors.push(newFloor);
             newFloor.addClass(toAdd);
-        } else {
+        } else { // If floor exists then push to existing floor
             let newFloor = this.findFloor(toAdd.floor);
             newFloor.addClass(toAdd);
         }
         //this.floors.push(newObject);
-    };
-
+    }
 }
 
 buildings = [];
@@ -97,7 +100,7 @@ module.exports = function() {
     this.Floor = Floor;
     this.Building = Building;
 
-    this.seeIfBuildingExists = function(buildName) {
+    this.seeIfBuildingExists = function(buildName) { // Check if building exists
         for (let building of this.buildings) {
             if(building.name == buildName) {
                 return true;
@@ -106,7 +109,7 @@ module.exports = function() {
         return false;;
     }
     
-    this.findBuild = function(buildName) {
+    this.findBuild = function(buildName) { // Find building
         for (let building of this.buildings) {
             if(building.name == buildName) {
                 return building;
