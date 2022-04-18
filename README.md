@@ -2,7 +2,7 @@
 
 UTD Rooms is a web-app designed for students at the University of Texas at Dallas to be able to find unused classrooms within the campus.
 <br></br>
-<img src="https://cdn.freelogovectors.net/wp-content/uploads/2018/03/ut-dallas-logo01.png" width=500>
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/UT_Dallas_2_Color_Emblem_-_SVG_Brand_Identity_File.svg" width=300>
 
 ## Why make UTD Rooms?
 With my Fall 2021 semester, I had a pretty horrible schedule with long breaks between classes, but not quite long enough to walk back home. I'd find myself trying to look for free rooms around the engineering buildings without having much luck in finding rooms, and even more embarrassingly peek into rooms without windows, and look into a room full of faces staring at me. During the period of studying for midterms, I decided instead of studying in the library like a normal person, I built a prototype for UTD Rooms for the ECS buildings to find a room. I used this CLI based application for most of the semester, and I decided it was useful enough for me to port over to a real web app. 
