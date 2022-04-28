@@ -12,7 +12,7 @@ With my Fall 2021 semester, I had a pretty horrible schedule with long breaks be
 1) Clone the repository to your local machine.
 3) Edit `index.js`. For command line search, uncomment the line with input, otherwise edit the variables. Note that there is currently no input validation. Your day must be Monday-Sunday, building is the abbreviated form (eg. ECSW, SCI, JO), and floor must be a valid positive integer. time_start and time_end are written in 24 hour time (eg. 15:00, 16:00). 
 4) Open a terminal instance in your local instance and run `npm install`.
-5) In the same terminal instance, run `node index.js`.
+5) In the same terminal instance, run `node index.js` to run the program. 
 
 ## Building UTD Rooms
 I initially built UTD Rooms to use Python and BeautifulSoup to scrape the UTD coursebook (like the original version used to do), but this ended up fruitless with the coursebook update that prevented me from getting data from the various course options. I ended up creating a quick script to download the json versions of each different course option (which still took ages due to how slow the site is when going through options).
