@@ -64,13 +64,13 @@ function returnClassUse(ourClass) {
 
 module.exports = function() {
     this.search = function(day, building, floor, startTime, endTime) {
-        console.log("[UTD Room Search]")
+        /*console.log("[UTD Room Search]")
         console.log("  [Day]: " + day);
         console.log("  [Building]: " + building);
         console.log("  [Floor]: " + floor);
         console.log("  [Start Time]: " + startTime);
         console.log("  [End Time]: " + endTime);
-        console.log("Searching for available rooms...\n")
+        console.log("Searching for available rooms...\n")*/
 
         let foundFloor = getFloor(building, floor);
         let goodClass = [];
@@ -98,7 +98,7 @@ module.exports = function() {
             }
         })
         
-        console.log("Found " + goodClass.length + " rooms:");
+        /*console.log("Found " + goodClass.length + " rooms:");
         for(let pair of goodClass) {
             console.log(pair[0]);
         }
@@ -108,6 +108,8 @@ module.exports = function() {
         for(let pair of badClass) {
             console.log(pair[0] + " " + returnClassUse(pair[1]));
         }
-        console.log("----------");
+        console.log("----------");*/
+
+        return goodClass
     }
 }
