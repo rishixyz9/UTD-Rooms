@@ -26,12 +26,12 @@ app.get('/', (req, res) => {
     let time_start = req.query.time_start;
     let time_end = req.query.time_end;
 
-    console.log(day, building, floor, time_start, time_end);      // your JSON    // echo the result back
+    console.log(`Logged search: ${day}, ${building}, ${floor}, ${time_start}, ${time_end}`);      // your JSON    // echo the result back
     return res.json(
         search(day, building, floor, time_start, time_end)
     );
 });
 
 app.listen(port, () => {
-    console.log(`Example app listening on localhost:${port}`)
+    console.log(`Application listening on localhost:${port}`)
 })

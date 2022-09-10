@@ -1,6 +1,6 @@
 let day = "Monday";
 let building = "ECSW";
-let floor = "1";
+let floor = "2";
 let time_start = "14:30";
 let time_end = "16:00";
 
