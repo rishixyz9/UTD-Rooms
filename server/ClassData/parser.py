@@ -2,8 +2,6 @@ import json
 import os, glob
 from collections import defaultdict
 
-from regex import R
-
 buildings = defaultdict(lambda: defaultdict(lambda: {}))
 
 for file in glob.glob('./22_Spring/*.json'):
@@ -23,6 +21,8 @@ for file in glob.glob('./22_Spring/*.json'):
                         time = defaultdict(lambda: [])
                         time[day].append(i['times'])
                         buildings[location[0]][location[1]] = time
+                buildings[location[0]][location[1]][day].sort()
+                
 
 json_data = json.dumps(buildings, indent=2)
 

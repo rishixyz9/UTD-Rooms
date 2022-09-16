@@ -3,7 +3,7 @@ body {
 }
 
 :root {
-  font-size: 62.5%;
+  font-size: calc(.5vw + .5vh);
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -11,8 +11,9 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
+  
 }
 
 .row-container {

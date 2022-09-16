@@ -1,11 +1,9 @@
 <script>
     function handlesubmit(event){
       if(event.key == 'Enter'){
-
         const input = document.getElementById('input').value
         document.getElementById('input').value = ''
         window.location = `/show-times?bldg=${input.toUpperCase()}`;
-  
       }
     }
   </script>

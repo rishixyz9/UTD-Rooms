@@ -8,7 +8,15 @@ export function load({ url }) {
     if (res) {
       return({
         bldg: url.searchParams.get('bldg'), 
+        status: '200',
         res: res});
+    }
+    else{
+      return({
+        bldg: url.searchParams.get('bldg'),
+        status: '404',
+        res: 'Not Found'
+      })
     }
    
     throw error(404, 'Not found');

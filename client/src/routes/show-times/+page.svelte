@@ -1,7 +1,16 @@
 <script>
   import  buildings  from '../../../../server/ClassData/output.json';
+  import Timeline from '../../components/Timeline.svelte';
   export let data
-  console.log(data)
+  function handlesubmit(event){
+    if(event.key == 'Enter'){
+      const input = document.getElementById('input').value
+      document.getElementById('input').value = ''
+      window.location = `/show-times?bldg=${input.toUpperCase()}`;
+    }
+  }
+
+  // console.log(data)
 </script>
   
 <main>
@@ -9,11 +18,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"/>
   <link href="/styles/app.css" rel="stylesheet" type="text/css"/>
+  <link href="/styles/results.css" rel="stylesheet" type="text/css"/>
 
   <div class="container">
-    <div class="flex-item box-1">
+    <div class="row-container">
       <p class="main">Results For <strong>"{data['bldg']}"</strong></p>
+      <input class="searchbar" placeholder="Need a spot somewhere else?" 
+      type="text" id="input" on:keydown={handlesubmit}/>
     </div>
+    <Timeline data={data}/>
   </div>
 
 </main>
