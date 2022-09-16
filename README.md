@@ -22,6 +22,11 @@ At the start when using Python, then Java, I had the data from the various sourc
 Since our data is already classified, we can search for the right classes easily. Searches are done by searching through the building and then floors, which are already created on our heap. We can use this classified data to easily find what classes fit in our criteria. 
 
 ## Stack
-The current stack uses Node.js and Express for the web server
+The current stack uses Node.js, Svelte-kit for routing and server, and svelte for front end
+
+## To Run
+1. cd into the client folder
+2. npm install
+3. npm run dev
 
 Credit to Mithil Viradia for the original version a couple years ago, idea and name.  
