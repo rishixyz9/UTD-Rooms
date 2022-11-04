@@ -1,6 +1,7 @@
 <script>
   import  buildings  from '../../../../server/ClassData/output.json';
   import Timeline from '../../components/Timeline.svelte';
+  import Searchbar from "../../components/Searchbar.svelte";
   export let data
   function handlesubmit(event){
     if(event.key == 'Enter'){
@@ -21,10 +22,11 @@
   <link href="/styles/results.css" rel="stylesheet" type="text/css"/>
 
   <div class="container">
-    <div class="row-container">
+    <div class="row-container w-3">
       <p class="main">Results For <strong>"{data['bldg']}"</strong></p>
       <input class="searchbar" placeholder="Need a spot somewhere else?" 
       type="text" id="input" on:keydown={handlesubmit}/>
+      <a class="home-icon" href="/"><img src="/images/home-icon.png" alt=""/></a>
     </div>
     <Timeline data={data}/>
   </div>

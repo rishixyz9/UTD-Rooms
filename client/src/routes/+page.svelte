@@ -16,6 +16,7 @@
         <Searchbar />
 
 
+
       </div>
       <div class="flex-item box-2">
         <p class="bottom-text">Created by Rishabh Vemparala and Raghav Pillai</p>

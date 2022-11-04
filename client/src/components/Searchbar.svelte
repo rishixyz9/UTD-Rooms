@@ -20,11 +20,14 @@
       return res
     }
 
-    function handlesubmit(event){
+    function handlesubmit(event, key){
       if(event.key == 'Enter'){
         const input = document.getElementById('input').value
         document.getElementById('input').value = ''
         window.location = `/show-times?bldg=${input.toUpperCase()}`;
+      }
+      else{
+        window.location = `/show-times?bldg=${key.toUpperCase()}`;
       }
     }
 
@@ -44,7 +47,7 @@
         {#if recs.length > 0}
             <div class="rec-box">
             {#each recs as key}
-                <div class="rec-item">
+                <div class="rec-item" on:click={handlesubmit(event, key)}>
                     {key}
                 </div>
             {/each}
