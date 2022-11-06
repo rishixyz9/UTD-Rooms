@@ -1,7 +1,5 @@
 <script>
-  import  buildings  from '../../../../server/ClassData/output.json';
   import Timeline from '../../components/Timeline.svelte';
-  import Searchbar from "../../components/Searchbar.svelte";
   export let data
   function handlesubmit(event){
     if(event.key == 'Enter'){
