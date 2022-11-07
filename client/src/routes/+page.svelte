@@ -1,12 +1,7 @@
 <script>
-    function handlesubmit(event){
-      if(event.key == 'Enter'){
-        const input = document.getElementById('input').value
-        document.getElementById('input').value = ''
-        window.location = `/show-times?bldg=${input.toUpperCase()}`;
-      }
-    }
-  </script>
+	import Searchbar from "../components/Searchbar.svelte";
+
+</script>
   
   <main>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -18,8 +13,10 @@
       <div class="flex-item box-1">
         <p class="main"><strong>UTD </strong>ROOMS</p>
         <p class="subtext">find open rooms anywhere on campus</p>
-        <input class="searchbar" placeholder="Where do you want to find a spot?" 
-        type="text" id="input" on:keydown={handlesubmit}/>
+        <Searchbar />
+
+
+
       </div>
       <div class="flex-item box-2">
         <p class="bottom-text">Created by Rishabh Vemparala and Raghav Pillai</p>

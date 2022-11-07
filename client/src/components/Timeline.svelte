@@ -18,6 +18,8 @@
 
     const rooms = Object.keys(data['res']).map((key) => [key]);
 
+    const num = rooms.keys().length;
+
 </script>
 
 <main>
@@ -44,7 +46,35 @@
 
 </main>
 
-<style>
+<style lang=scss>
+    @keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+    }
+
+    /* Firefox < 16 */
+    @-moz-keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+    /* Safari, Chrome and Opera > 12.1 */
+    @-webkit-keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+    /* Internet Explorer */
+    @-ms-keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+    /* Opera < 12.1 */
+    @-o-keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
     .room-container {
         width: 100%;
         display: flex;
@@ -53,6 +83,15 @@
         margin-bottom: 1em;
         text-align: center;
         justify-content: center;
+        opacity: 0;
+        
+    }
+
+    @for $i from 1 through 50{
+        .room-container:nth-child(#{$i}n) {
+            animation: fadein .5s forwards;
+            animation-delay: #{$i * 0.1}s;
+        }
     }
 
     .room:hover{
